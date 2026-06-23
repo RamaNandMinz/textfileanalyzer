@@ -1,0 +1,28 @@
+cat << 'EOF' > edge_cases.txt
+# Test Case 1: Leading and trailing whitespace, and multiple spaces between words.
+# Expected: "start", "middle", "end" should be counted as 3 words.
+# The surrounding whitespace should be ignored.
+
+  start   middle      end
+
+# Test Case 2: Punctuation and mixed case.
+# Expected: Tests if "Go," and "go!" are treated as "go".
+# Your tolower() handles case, but how does isalpha() handle punctuation?
+# This will reveal if your word frequency is for "go" (3) or "Go," (1), "go!" (1), "team" (1).
+Go, team, go!
+
+# Test Case 3: A file with only whitespace.
+# Expected: Character and line counts should be non-zero, but word count must be 0.
+
+  	
+
+# Test Case 4: A single, long word with no spaces.
+# Expected: Word count should be exactly 1.
+# This also tests that your word buffer doesn't overflow if the word is long.
+Supercalifragilisticexpialidocious
+
+# Test Case 5: A file ending with a word and no final newline character.
+# Expected: This specifically tests the `if (word_buffer_index > 0)` check
+# that runs AFTER the main file-reading loop. The word "here" must be counted.
+The file ends here
+EOF
